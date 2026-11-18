@@ -45,7 +45,51 @@ button{background:#7668e9;border-radius:15px;box-shadow:0 3px 0 #6559d015}.secon
 #practiceView.screen-active{display:grid!important}
 #libraryView.screen-active,#bookmarksView.screen-active,#progressView.screen-active,#vocabView.screen-active{display:block!important}
 @media(max-width:760px){#practiceView.screen-active{display:block!important}}
-</style></head>
+</style>
+<style id="chinese-refresh-v3">
+:root{--ink:#223342;--muted:#74818b;--teal:#087f91;--line:#dce9e9;--paper:#eaf8fa;--white:#fff}
+body{background:linear-gradient(180deg,#d9f4fa 0,#e9f9fc 370px,#f5fbfa 100%);color:var(--ink)}
+header{background:#ffffffee;border-bottom:1px solid #d9ebed}
+.brand span{color:#087f91}
+.hero{background:linear-gradient(125deg,#fafdfe,#d9f5f8 72%,#d3eff2);border:1px solid #fff}
+.hero h1{color:#193c4a}
+.panel,.card,.stat,.streak-panel{background:#fff;border:1px solid #e3eff0;box-shadow:0 10px 32px #4a9aa015}
+button:not(.secondary):not(.ghost):not(.token):not(.tab):not(.flipcard):not(.vocab-option):not(.reward-close){background:#087f91;color:#fff;border:1px solid #087f91;box-shadow:0 4px 0 #056677}
+button:disabled{opacity:.4!important;cursor:not-allowed;box-shadow:none!important}
+#checkBtn:not(:disabled){background:#087f91!important;color:#fff!important;border-color:#087f91!important;opacity:1!important;box-shadow:0 5px 0 #056677!important;font-weight:800}
+#nextBtn:not(:disabled){background:#087f91!important;color:white!important;opacity:1!important}
+.tab.active{background:#087f91;color:white}.tab{background:#f2fafb;color:#31596a;border:1px solid #d8e9ea}
+.pill{background:#def5f5;color:#087f91}.progress i{background:linear-gradient(90deg,#69c6ce,#087f91)}
+.token{border-color:#a9dce0;color:#244651}.token.chosen{background:#def4f4;border-color:#5bb6bf}
+.answer-area{background:#f7fcfc;border-color:#9ed7dc}
+.feedback.good{background:#edf9f2;border-color:#a3d9c0}
+.vocab-controls select,.vocab-controls input{border-color:#d7e8e9}
+#vocabStage{position:relative}
+#vocabStage .flash-frame{position:relative;padding:7px 0 4px}
+#vocabStage .flash-scene{height:clamp(270px,44vh,410px);perspective:1100px}
+#vocabStage .flash-inner{height:100%;width:100%;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.2,1)}
+#vocabStage .flash-inner.is-flipped{transform:rotateY(180deg)}
+#vocabStage .flash-face{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px 52px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:26px;border:1px solid #d8edf0;box-shadow:0 9px 28px #62a2b01c;background:linear-gradient(145deg,#fff,#e9f9fc)}
+#vocabStage .flash-face.back{transform:rotateY(180deg);background:linear-gradient(145deg,#f4fcfc,#dff4f7)}
+#vocabStage .flash-face:before{content:"山  ·  水";position:absolute;top:19px;left:22px;font-family:serif;font-size:12px;letter-spacing:4px;color:#87a9ae}
+#vocabStage .flash-face:after{content:"中 文";position:absolute;right:22px;bottom:16px;font-family:serif;font-size:12px;letter-spacing:4px;color:#a2b9b8}
+#vocabStage .flash-hanzi{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(62px,12vw,100px);font-weight:600;color:#1e505d;line-height:1.3;overflow-wrap:anywhere}
+#vocabStage .flash-meaning{font-size:clamp(24px,5vw,36px);font-weight:800;color:#1c5260}
+#vocabStage .flash-pinyin{font-size:21px;color:#0b8c98;margin-top:10px}
+#vocabStage .flash-prompt{font-size:13px;color:#7c969a;margin-top:16px}
+#vocabStage .flash-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0}
+#vocabStage .flash-arrow{flex:0 0 56px;height:50px;display:flex;align-items:center;justify-content:center;border:1px solid #b7e0e3!important;border-radius:50%;background:#e9f9fa!important;color:#146374!important;box-shadow:none!important;font-size:27px}
+#vocabStage .flash-progress{font-size:13px;color:#66888e;text-align:center}
+#vocabStage .flash-extras{min-height:114px}
+#vocabStage .flash-example{background:#f1faf9;border-radius:16px;padding:13px 16px;font-size:15px;line-height:1.6;min-height:68px}
+#vocabStage .flash-placeholder{color:#8ea9ab}
+#vocabStage .flash-mark{min-height:44px;min-width:155px;margin:9px 0 0}
+#vocabStage .flash-mark:disabled{opacity:.65!important}
+#vocabStage .flash-scene:focus-visible{outline:3px solid #087f91;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){#vocabStage .flash-inner{transition:none}}
+@media(max-width:600px){#vocabStage .flash-face{padding:25px 32px}#vocabStage .flash-scene{height:315px}#vocabStage .flash-arrow{flex-basis:49px;height:49px}}
+</style>
+</head>
 <body><noscript><div style="padding:16px;background:#fff0c9;color:#653b00">Trình xem tệp này không chạy JavaScript. Hãy mở website trong Safari thay vì xem trước index.html trong ứng dụng Tệp (Files).</div></noscript>
 <header><div class="nav"><div><div class="brand">中文 <span>Sentence Lab</span></div><div class="tag">BUILD YOUR CHINESE, ONE SENTENCE AT A TIME</div></div><button class="secondary" id="resetProgress">Đặt lại tiến độ</button></div></header>
 <main>
@@ -112,12 +156,38 @@ function vpool(){let level=$('vocabLevel').value,term=$('vocabSearch').value.tri
 function vnext(dir){let pool=vpool();if(!pool.length)return;let pos=pool.indexOf(vi);vi=pool[(pos<0?0:(pos+dir+pool.length)%pool.length)];vflipped=false;vanswered=false;vchoices=[];renderVocab()}
 function vmark(correct){let v=VOCAB[vi],k=v.level+'|'+v.word;let o=vprogress[k]||{tries:0,correct:0};o.tries++;if(correct)o.correct++;vprogress[k]=o;try{localStorage.setItem(VKEY,JSON.stringify(vprogress))}catch(e){}}
 function voptions(v,mode){let pool=VOCAB.filter(x=>x.word!==v.word&&x.level===v.level);if(mode==='meaning')pool=pool.filter(x=>x.meaning!==v.meaning);let seenLabels=new Set([mode==='word'?v.word:v.meaning]);let distract=[];for(let x of shuffle(pool)){let label=mode==='word'?x.word:x.meaning;if(!seenLabels.has(label)){seenLabels.add(label);distract.push(x)}if(distract.length===3)break;}return shuffle([v,...distract]).map(x=>({text:mode==='word'?x.word:x.meaning,correct:x.word===v.word}))}
-function renderVocab(){let pool=vpool();$('vocabCount').textContent=VOCAB.length+' từ luyện tập · '+pool.length+' từ đang lọc';let st=$('vocabStage');if(!pool.length){st.innerHTML='<div class="empty">Không tìm thấy từ phù hợp.</div>';$('vocabMeta').textContent='';return}if(!pool.includes(vi))vi=pool[0];let v=VOCAB[vi],mode=$('vocabMode').value,k=v.level+'|'+v.word,rec=vprogress[k];$('vocabMeta').textContent=v.level+' · Thẻ '+(pool.indexOf(vi)+1)+'/'+pool.length+(rec?' · Đúng '+rec.correct+'/'+rec.tries+' lần':' · Chưa luyện');st.innerHTML='';
+function renderVocab(){let pool=vpool();$('vocabCount').textContent=VOCAB.length+' từ luyện tập · '+pool.length+' từ đang lọc';let st=$('vocabStage');document.querySelector('#vocabView > .actions').style.display=$('vocabMode').value==='flash'?'none':'flex';if(!pool.length){st.innerHTML='<div class="empty">Không tìm thấy từ phù hợp.</div>';$('vocabMeta').textContent='';return}if(!pool.includes(vi))vi=pool[0];let v=VOCAB[vi],mode=$('vocabMode').value,k=v.level+'|'+v.word,rec=vprogress[k];$('vocabMeta').textContent=v.level+' · Thẻ '+(pool.indexOf(vi)+1)+'/'+pool.length+(rec?' · Đúng '+rec.correct+'/'+rec.tries+' lần':' · Chưa luyện');st.innerHTML='';
  if(mode==='flash'){
-  let card=document.createElement('button');card.className='flipcard';card.setAttribute('aria-label','Lật thẻ từ vựng');card.innerHTML=vflipped?'<span class="trans"></span><span class="py"></span><span class="prompt">Chạm để xem chữ Hán</span>':'<span class="hanzi"></span><span class="prompt">Chạm để lật thẻ xem nghĩa và pinyin</span>';
-  if(vflipped){card.querySelector('.trans').textContent=v.meaning;card.querySelector('.py').textContent=v.pinyin}else card.querySelector('.hanzi').textContent=v.word;
-  card.onclick=()=>{vflipped=!vflipped;renderVocab()};st.append(card);
-  if(vflipped){let ex=document.createElement('div');ex.className='vocab-example';ex.textContent=v.example+' ('+(v.examplePinyin||'')+') — '+v.exampleMeaning;st.append(ex);let b=document.createElement('button');b.textContent='Đã nhớ từ này';b.onclick=()=>{vmark(true);window.showLearningReward?.();vnext(1)};st.append(b)}
+  const frame=document.createElement('div');frame.className='flash-frame';
+  frame.innerHTML=`<div class="flash-scene" role="button" tabindex="0" aria-label="Lật thẻ từ vựng">
+   <div class="flash-inner${vflipped?' is-flipped':''}">
+    <div class="flash-face front"><div class="flash-hanzi"></div><div class="flash-prompt">Chạm để xem nghĩa và pinyin</div></div>
+    <div class="flash-face back"><div class="flash-meaning"></div><div class="flash-pinyin"></div><div class="flash-prompt">Chạm để xem lại chữ Hán</div></div>
+   </div></div>
+   <div class="flash-nav"><button type="button" class="flash-arrow" aria-label="Từ trước">‹</button><div class="flash-progress">← Từ trước &nbsp; · &nbsp; Từ tiếp theo →</div><button type="button" class="flash-arrow" aria-label="Từ tiếp theo">›</button></div>
+   <div class="flash-extras"><div class="flash-example"></div><button type="button" class="flash-mark">Đã nhớ từ này ✓</button></div>`;
+  frame.querySelector('.flash-hanzi').textContent=v.word;
+  frame.querySelector('.flash-meaning').textContent=v.meaning;
+  frame.querySelector('.flash-pinyin').textContent=v.pinyin;
+  const scene=frame.querySelector('.flash-scene'),inner=frame.querySelector('.flash-inner');
+  const example=frame.querySelector('.flash-example'),mark=frame.querySelector('.flash-mark');
+  const showExtras=()=>{
+   example.innerHTML='';
+   if(vflipped){
+    example.textContent=[v.example,v.examplePinyin?'('+v.examplePinyin+')':'',v.exampleMeaning?'— '+v.exampleMeaning:''].filter(Boolean).join(' ');
+    mark.disabled=false;mark.style.visibility='visible';
+   }else{
+    example.textContent='Lật thẻ để xem câu ví dụ và đánh dấu đã nhớ.';
+    example.classList.add('flash-placeholder');mark.disabled=true;mark.style.visibility='hidden';
+   }
+  };
+  const flip=()=>{vflipped=!vflipped;inner.classList.toggle('is-flipped',vflipped);example.classList.remove('flash-placeholder');showExtras()};
+  scene.onclick=flip;
+  scene.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}};
+  frame.querySelector('[aria-label="Từ trước"]').onclick=()=>vnext(-1);
+  frame.querySelector('[aria-label="Từ tiếp theo"]').onclick=()=>vnext(1);
+  mark.onclick=()=>{vmark(true);vnext(1)};
+  showExtras();st.append(frame);
  }else if(mode==='cloze'){
   let sentence=v.example||'',idx=sentence.indexOf(v.word);if(idx<0){st.innerHTML='<div class="empty">Ví dụ trong file không chứa từ cần điền. Hãy chuyển sang thẻ khác hoặc chế độ trắc nghiệm.</div>';return;}
   let h=document.createElement('div');h.className='vocab-quiz-title';h.textContent='Điền chữ Hán còn thiếu:';st.append(h);
