@@ -31,7 +31,7 @@ button{background:#7668e9;border-radius:15px;box-shadow:0 3px 0 #6559d015}.secon
 .streak-panel{display:flex;gap:14px;align-items:center;background:#ffffffec;border:1px solid #fff;border-radius:24px;padding:15px 20px;margin:0 0 16px;box-shadow:0 8px 28px #7669b012;flex-wrap:wrap}
 .streak-icon{font-size:35px}.streak-num{font-weight:850;font-size:25px;color:#7569e9;line-height:1.1}.streak-copy{font-size:12px;color:#8883a3}.streak-week{display:flex;gap:7px;margin-left:auto}.streak-day{width:34px;height:43px;border-radius:13px;background:#f0edfc;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;color:#8d86b6}.streak-day b{font-size:15px}.streak-day.done{background:#ded6ff;color:#6958d5}.streak-day.today{outline:2px solid #9888ed}
 .reward-overlay{position:fixed;inset:0;background:#211c49a3;z-index:30;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
-.reward-overlay.open{display:flex}.reward-modal{width:min(430px,100%);border-radius:30px;background:linear-gradient(155deg,#e9e3ff,#fff 72%);padding:26px;text-align:center;box-shadow:0 30px 90px #24204755;position:relative}
+.reward-overlay.open{display:none !important}.reward-modal{width:min(430px,100%);border-radius:30px;background:linear-gradient(155deg,#e9e3ff,#fff 72%);padding:26px;text-align:center;box-shadow:0 30px 90px #24204755;position:relative}
 .reward-close{position:absolute;right:15px;top:14px;background:#fff;color:#665e94;box-shadow:none;padding:7px 12px}
 .reward-photo{height:235px;width:auto;max-width:100%;object-fit:contain;display:block;margin:8px auto 13px;border:6px solid #fff;border-radius:23px;background:#e2dcff;box-shadow:0 10px 25px #6555b62b}
 .reward-photo-placeholder{height:170px;width:170px;margin:8px auto 13px;border:6px solid #fff;border-radius:50%;background:linear-gradient(140deg,#d6c9ff,#a6b9ff);display:flex;align-items:center;justify-content:center;font-size:65px}
@@ -159,7 +159,7 @@ renderStats();setQuestion(0);showView('practice');
  function mark(){let a=dates();if(!a.includes(today())){a.push(today());a=a.slice(-400);try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}paint()}
  function portrait(src){let img=document.createElement('img');img.className='reward-photo';img.alt='Ảnh nghệ sĩ do người học lựa chọn';img.src=src;$('rewardPortrait').replaceWith(img);img.id='rewardPortrait'}
  try{let saved=localStorage.getItem(PHOTO);if(saved)portrait(saved)}catch(e){}
- function reward(){mark();$('rewardOverlay').classList.add('open')}
+ function reward(){mark()}
  function close(){$('rewardOverlay').classList.remove('open')}
  $('rewardClose').onclick=close;$('rewardContinue').onclick=close;
  $('rewardOverlay').addEventListener('click',e=>{if(e.target===$('rewardOverlay'))close()});
