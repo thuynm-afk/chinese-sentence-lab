@@ -145,6 +145,14 @@ input,select{border-radius:5px!important}
 #randomSequenceToggle{accent-color:#8e493e}
 </style><style id="dictionary-v1">
 .dictionary-tip{font-size:12px;color:#6b817a;margin:8px 0 4px}.dictionary-word{font-family:var(--calligraphy,"Kaiti SC",serif)!important;font-size:inherit!important;display:inline!important;padding:2px 1px!important;margin:0!important;border:0!important;border-bottom:1px dotted #94a99b!important;border-radius:0!important;background:transparent!important;color:inherit!important;box-shadow:none!important;line-height:1.75;cursor:pointer}.dictionary-word:active,.dictionary-word:focus-visible{background:#e4e9d9!important;outline:1px solid #b7c6b6}.dictionary-sheet{position:fixed;inset:0;background:#1a29298a;display:none;align-items:flex-end;justify-content:center;z-index:999;padding:12px;backdrop-filter:blur(3px)}.dictionary-sheet.open{display:flex}.dictionary-card{position:relative;width:min(510px,100%);max-height:78dvh;overflow:auto;background:#fbf8ed;border:1px solid #d4d7c7;border-radius:15px 15px 8px 8px;padding:24px 23px 27px;box-shadow:0 15px 50px #172d2a55}.dictionary-card:before{content:"";position:absolute;inset:7px;border:1px solid #e4e0d2;pointer-events:none}.dictionary-close{position:absolute;top:15px;right:16px;padding:5px 11px!important}.dictionary-hanzi{font:normal 48px/1.4 var(--calligraphy,"Kaiti SC",serif);color:#315e58}.dictionary-pinyin{font-size:19px;color:#9a5c4d}.dictionary-meaning{font-size:19px;font-weight:700;margin:12px 0}.dictionary-example{margin-top:14px;padding:13px;background:#eff1e8;border-radius:7px;line-height:1.65;white-space:pre-wrap}.dictionary-badge{font-size:12px;color:#6b827a}.dictionary-empty{color:#72817d;font-size:14px}.dictionary-save{margin-top:12px}
+</style><style id="mandarin-audio-style">
+.audio-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 10px}.audio-btn{background:#315e58!important;color:#fff!important;border:1px solid #315e58!important;border-radius:6px!important;padding:9px 14px!important;font-size:14px!important;box-shadow:none!important;opacity:1!important}.audio-btn:disabled{opacity:.5!important}.audio-speed{background:#fffdf5;color:#315e58;border:1px solid #cbd7ca;border-radius:6px;padding:8px;font-size:14px}.audio-status{font-size:12px;color:#687d73}.dictionary-audio{margin-top:10px}.audio-flash{margin:8px 0}.audio-btn:focus-visible{outline:3px solid #b48263;outline-offset:2px}
+</style><style id="review-errors-ui">
+.review-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f5f2e8;border:1px solid #d7d6c6;border-radius:9px;padding:15px 18px;margin:12px 0}
+.review-summary p{margin:6px 0 0}.review-counts{display:flex;gap:7px;flex-wrap:wrap}.review-counts span{background:#e4eade;color:#385b50;padding:7px 11px;border-radius:6px;font-weight:750;white-space:nowrap}
+.review-flash-buttons{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;min-height:54px}
+.review-flash-buttons button{margin:9px 0 0;min-width:140px;min-height:44px}
+@media(max-width:600px){.review-summary{flex-direction:column;align-items:flex-start}.review-flash-buttons button{min-width:125px;font-size:13px}}
 </style></head>
 <body><noscript><div style="padding:16px;background:#fff0c9;color:#653b00">Trình xem tệp này không chạy JavaScript. Hãy mở website trong Safari thay vì xem trước index.html trong ứng dụng Tệp (Files).</div></noscript>
 <header><div class="nav"><div><div class="brand">中文 <span>Sentence Lab</span></div><div class="tag">BUILD YOUR CHINESE, ONE SENTENCE AT A TIME</div></div><button class="secondary" id="resetProgress">Đặt lại tiến độ</button></div></header>
@@ -156,8 +164,8 @@ input,select{border-radius:5px!important}
 <section class="card"><div class="topline"><span class="pill" id="levelPill">HSK 1</span><span class="small muted" id="counter">Câu 1 / 33</span></div><div class="progress"><i id="progressBar"></i></div><h2 class="question-title" id="topic">Trật tự câu cơ bản</h2><p class="hint" id="hint"></p><div class="section-label">CÂU CỦA BẠN · BẤM TỪ ĐỂ GHÉP</div><div class="answer-area" id="answerArea"><span class="answer-placeholder">Chọn các thẻ từ bên dưới để tạo thành câu…</span></div><div class="actions"><button class="secondary" id="undoBtn">Bỏ từ cuối</button><button class="secondary" id="clearBtn">Làm lại</button><button id="checkBtn">Kiểm tra đáp án</button></div><div class="section-label">NGÂN HÀNG TỪ</div><div class="wordbank" id="wordBank"></div><div id="feedback"></div><div class="actions" style="justify-content:space-between"><button class="secondary" id="prevBtn">← Câu trước</button><button id="nextBtn">Câu tiếp theo →</button></div></section></div>
 <section id="libraryView" class="card" hidden><div class="topline"><div><h2 style="margin:0">Ngân hàng câu hỏi</h2><div class="muted small">Tìm câu theo chủ điểm, cấp độ hoặc trạng thái.</div></div><input id="searchBox" placeholder="Tìm chủ điểm / câu tiếng Trung…" style="padding:10px;border:1px solid var(--line);border-radius:10px;max-width:260px"></div><div class="field"><select id="libraryLevel"><option value="all">Tất cả cấp độ</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5</option><option>HSK 6</option></select></div><div class="list" id="libraryList"></div></section>
 <section id="bookmarksView" class="card" hidden><h2 style="margin-top:0">Câu đã lưu</h2><div class="list" id="bookmarkList"></div></section>
-<section id="progressView" class="card" hidden><h2 style="margin-top:0">Tổng quan học tập</h2><div class="stats" id="progressStats"></div><h3>Những câu cần ôn lại</h3><div class="list" id="wrongList"></div><div class="actions"><button class="secondary" id="exportBtn">Xuất dữ liệu tiến độ (JSON)</button><label class="secondary" style="border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:650">Nhập tiến độ<input type="file" id="importFile" accept=".json,application/json" hidden></label></div></section>
-<section id="vocabView" class="card" hidden><div class="topline"><div><h2 style="margin:0">Từ vựng HSK 1–6</h2><div class="muted small" id="vocabCount"></div></div></div><div class="vocab-controls"><label>Cấp độ <select id="vocabLevel"><option value="all">Tất cả</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5</option><option>HSK 6</option></select></label><label>Chế độ <select id="vocabMode"><option value="flash">Lật thẻ</option><option value="cloze">Điền từ trong câu</option><option value="word">Chọn chữ Hán theo nghĩa</option><option value="meaning">Chọn nghĩa theo chữ Hán</option></select></label><label>Tìm từ <input id="vocabSearch" placeholder="汉字 / pinyin / nghĩa..." /></label></div><div class="vocab-meta" id="vocabMeta"></div><div id="vocabStage"></div><div class="actions"><button class="secondary" id="vocabPrev">Câu trước</button><button id="vocabNext">Câu tiếp theo</button><button class="secondary" id="vocabRandom">Ngẫu nhiên</button></div><div class="small muted" style="margin-top:16px">Từ vựng HSK 1–6 nhập từ file Excel bạn cung cấp, giữ nguyên phiên âm, nghĩa và ví dụ. Tiến độ lưu trên thiết bị này.</div></section>
+<section id="progressView" class="card" hidden><h2 style="margin-top:0">Tổng quan học tập</h2><div class="stats" id="progressStats"></div><div class="review-summary"><div><strong>Ôn tập lỗi sai</strong><p class="small muted">Câu sai và từ chưa nhớ sẽ được giữ lại đến khi m làm đúng hoặc đánh dấu đã thuộc.</p></div><div class="review-counts"><span id="reviewSentenceCount">0 câu</span><span id="reviewWordCount">0 từ</span></div></div><div class="actions"><button id="reviewSentencesBtn">Ôn câu sai</button><button id="reviewWordsBtn" class="secondary">Ôn từ chưa nhớ</button></div><h3>Những câu cần ôn lại</h3><div class="list" id="wrongList"></div><div class="actions"><button class="secondary" id="exportBtn">Xuất dữ liệu tiến độ (JSON)</button><label class="secondary" style="border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:650">Nhập tiến độ<input type="file" id="importFile" accept=".json,application/json" hidden></label></div></section>
+<section id="vocabView" class="card" hidden><div class="topline"><div><h2 style="margin:0">Từ vựng HSK 1–6</h2><div class="muted small" id="vocabCount"></div></div></div><div class="vocab-controls"><label>Cấp độ <select id="vocabLevel"><option value="all">Tất cả</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5</option><option>HSK 6</option></select></label><label>Chế độ <select id="vocabMode"><option value="flash">Lật thẻ</option><option value="cloze">Điền từ trong câu</option><option value="word">Chọn chữ Hán theo nghĩa</option><option value="meaning">Chọn nghĩa theo chữ Hán</option></select></label><label>Ôn tập <select id="vocabReviewFilter"><option value="all">Tất cả từ</option><option value="wrong">Chỉ từ cần ôn</option></select></label><label>Tìm từ <input id="vocabSearch" placeholder="汉字 / pinyin / nghĩa..." /></label></div><div class="vocab-meta" id="vocabMeta"></div><div id="vocabStage"></div><div class="actions"><button class="secondary" id="vocabPrev">Câu trước</button><button id="vocabNext">Câu tiếp theo</button><button class="secondary" id="vocabRandom">Ngẫu nhiên</button></div><div class="small muted" style="margin-top:16px">Từ vựng HSK 1–6 nhập từ file Excel bạn cung cấp, giữ nguyên phiên âm, nghĩa và ví dụ. Tiến độ lưu trên thiết bị này.</div></section>
 <div class="footer">Chinese Sentence Lab · Bản offline · Dữ liệu được lưu trên trình duyệt của thiết bị này.</div>
 </main>
 <script>
@@ -182,14 +190,14 @@ function renderQuestion(){
 function expected(q){return q.tokens.map((_,i)=>i)}
 function check(){
  const q=question(), correct=selected.length===q.tokens.length&&selected.every((v,i)=>v===i);
- const a=state.attempts[current]||{tries:0,correct:0};a.tries++;if(correct)a.correct++;a.last=Date.now();state.attempts[current]=a;save();checked=true;
+ const a=state.attempts[current]||{tries:0,correct:0};a.tries++;if(correct)a.correct++;a.needsReview=!correct;a.last=Date.now();state.attempts[current]=a;save();checked=true;
  $('feedback').innerHTML=`<div class="feedback ${correct?'good':'bad'}"><h3>${correct?'✓ Chính xác!':'Chưa đúng — cùng phân tích nhé'}</h3><div class="chinese">${q.answer}</div><div class="pinyin">${q.pinyin}</div><div class="meaning">${q.meaning}</div><p><strong>Cấu trúc:</strong> ${q.pattern}</p><p class="explain"><strong>Giải thích:</strong> ${q.explanation}</p><p class="small muted">${correct?'Hãy đọc lại câu và pinyin thành tiếng để ghi nhớ.':'Đáp án đúng đã được hiển thị. Hãy thử ghép lại một lần nữa sau khi đọc giải thích.'}</p></div>`;
  renderQuestionKeepFeedback();
 }
 function renderQuestionKeepFeedback(){let f=$('feedback').innerHTML;renderQuestion();$('feedback').innerHTML=f;$('checkBtn').disabled=true;$('undoBtn').disabled=true;$('clearBtn').disabled=true;$('wordBank').querySelectorAll('button').forEach(b=>b.disabled=true)}
 function renderStats(){let vals=Object.values(state.attempts),tries=vals.reduce((s,x)=>s+x.tries,0),correct=vals.reduce((s,x)=>s+x.correct,0);$('statDone').textContent=vals.filter(x=>x.tries).length;$('statAccuracy').textContent=tries?Math.round(correct/tries*100)+'%':'—';$('statSaved').textContent=state.bookmarks.length}
 function showView(v){view=v;document.querySelectorAll('.tab').forEach(b=>{const active=b.dataset.view===v;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active))});['practice','library','bookmarks','progress','vocab'].forEach(x=>{const el=$(x+'View'),active=x===v;el.hidden=!active;el.classList.toggle('screen-active',active)});if(v==='vocab')renderVocab();if(v==='library')renderLibrary();if(v==='bookmarks')renderBookmarks();if(v==='progress')renderProgress()}
-function filtered(){let level=$('levelFilter').value,mode=$('modeFilter').value;return QUESTIONS.map((q,i)=>i).filter(i=>(level==='all'||QUESTIONS[i].level===level)&&(mode==='all'||(mode==='new'&&!state.attempts[i])||(mode==='wrong'&&state.attempts[i]&&state.attempts[i].correct<state.attempts[i].tries)||(mode==='bookmarked'&&state.bookmarks.includes(i))))}
+function filtered(){let level=$('levelFilter').value,mode=$('modeFilter').value;return QUESTIONS.map((q,i)=>i).filter(i=>(level==='all'||QUESTIONS[i].level===level)&&(mode==='all'||(mode==='new'&&!state.attempts[i])||(mode==='wrong'&&state.attempts[i]&&(state.attempts[i].needsReview===true||(state.attempts[i].needsReview===undefined&&state.attempts[i].correct<state.attempts[i].tries)))||(mode==='bookmarked'&&state.bookmarks.includes(i))))}
 let randomSeen=[];
 function nextRandom(){
  let ids=filtered();if(!ids.length){alert('Không có câu phù hợp bộ lọc.');return}
@@ -201,12 +209,14 @@ function nextRandom(){
 function toggleBookmark(i){state.bookmarks=state.bookmarks.includes(i)?state.bookmarks.filter(x=>x!==i):[...state.bookmarks,i];save();renderLibrary();renderBookmarks()}
 function renderLibrary(){let q=$('searchBox').value.toLowerCase(),level=$('libraryLevel').value;let ids=QUESTIONS.map((x,i)=>i).filter(i=>(level==='all'||QUESTIONS[i].level===level)&&(QUESTIONS[i].topic.toLowerCase().includes(q)||QUESTIONS[i].answer.toLowerCase().includes(q)||QUESTIONS[i].meaning.toLowerCase().includes(q)));$('libraryList').innerHTML=ids.map(i=>`<div class="item"><div><b>${QUESTIONS[i].topic}</b><small>${QUESTIONS[i].level} · ${QUESTIONS[i].answer} · ${QUESTIONS[i].meaning}</small></div><div><button class="secondary" onclick="openQuestion(${i})">Học</button> <button class="ghost" onclick="toggleBookmark(${i})">${state.bookmarks.includes(i)?'★':'☆'}</button></div></div>`).join('')||'<div class="empty">Không tìm thấy câu phù hợp.</div>'}
 function renderBookmarks(){let ids=state.bookmarks;$('bookmarkList').innerHTML=ids.map(i=>`<div class="item"><div><b>${QUESTIONS[i].topic}</b><small>${QUESTIONS[i].answer} · ${QUESTIONS[i].meaning}</small></div><button onclick="openQuestion(${i})">Học câu này</button></div>`).join('')||'<div class="empty">Chưa có câu nào được lưu. Bấm ☆ trong ngân hàng câu hỏi để lưu câu khó.</div>'}
-function renderProgress(){let vals=Object.values(state.attempts),tries=vals.reduce((s,x)=>s+x.tries,0),correct=vals.reduce((s,x)=>s+x.correct,0);$('progressStats').innerHTML=`<div class="stat"><b>${QUESTIONS.length}</b><small>Tổng câu hiện có</small></div><div class="stat"><b>${vals.filter(x=>x.tries).length}</b><small>Câu đã luyện</small></div><div class="stat"><b>${tries?Math.round(correct/tries*100):0}%</b><small>Độ chính xác</small></div><div class="stat"><b>${state.bookmarks.length}</b><small>Câu đã lưu</small></div>`;let ids=Object.keys(state.attempts).map(Number).filter(i=>state.attempts[i].correct<state.attempts[i].tries);$('wrongList').innerHTML=ids.map(i=>`<div class="item"><div><b>${QUESTIONS[i].topic}</b><small>${QUESTIONS[i].level} · Sai ít nhất một lần</small></div><button onclick="openQuestion(${i})">Ôn lại</button></div>`).join('')||'<div class="empty">Chưa có câu sai. Tiếp tục luyện tập nhé!</div>'}
+function renderProgress(){let vals=Object.values(state.attempts),tries=vals.reduce((s,x)=>s+x.tries,0),correct=vals.reduce((s,x)=>s+x.correct,0);$('progressStats').innerHTML=`<div class="stat"><b>${QUESTIONS.length}</b><small>Tổng câu hiện có</small></div><div class="stat"><b>${vals.filter(x=>x.tries).length}</b><small>Câu đã luyện</small></div><div class="stat"><b>${tries?Math.round(correct/tries*100):0}%</b><small>Độ chính xác</small></div><div class="stat"><b>${state.bookmarks.length}</b><small>Câu đã lưu</small></div>`;let ids=Object.keys(state.attempts).map(Number).filter(i=>(state.attempts[i].needsReview===true||(state.attempts[i].needsReview===undefined&&state.attempts[i].correct<state.attempts[i].tries)));$('reviewSentenceCount').textContent=ids.length+' câu';$('reviewWordCount').textContent=Object.values(vprogress).filter(x=>x.needsReview===true||(x.needsReview===undefined&&x.tries>x.correct)).length+' từ';$('wrongList').innerHTML=ids.map(i=>`<div class="item"><div><b>${QUESTIONS[i].topic}</b><small>${QUESTIONS[i].level} · Đang cần ôn tập</small></div><button onclick="openQuestion(${i})">Ôn lại</button></div>`).join('')||'<div class="empty">Chưa có câu sai. Tiếp tục luyện tập nhé!</div>'}
 function openQuestion(i){showView('practice');setQuestion(i)}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>showView(b.dataset.view));
 $('undoBtn').onclick=()=>{selected.pop();renderQuestion()};$('clearBtn').onclick=()=>{selected=[];renderQuestion()};$('checkBtn').onclick=check;$('prevBtn').onclick=()=>setQuestion(current-1);$('nextBtn').onclick=()=>{$('randomSequenceToggle').checked?nextRandom():setQuestion(current===QUESTIONS.length-1?0:current+1)};$('randomBtn').onclick=nextRandom;
 $('randomSequenceToggle').checked=localStorage.getItem('csl.randomSequence')==='yes';$('randomSequenceToggle').onchange=()=>{localStorage.setItem('csl.randomSequence',$('randomSequenceToggle').checked?'yes':'no');renderQuestion()};$('levelFilter').onchange=nextRandom;$('modeFilter').onchange=nextRandom;$('shuffleToggle').onchange=()=>{if(!checked){tokens=orderFor(question());renderQuestion()}};
 $('searchBox').oninput=renderLibrary;$('libraryLevel').onchange=renderLibrary;
+$('reviewSentencesBtn').onclick=()=>{let ids=Object.keys(state.attempts).map(Number).filter(i=>{let a=state.attempts[i];return a.needsReview===true||(a.needsReview===undefined&&a.correct<a.tries)});if(!ids.length){alert('Chưa có câu cần ôn.');return}$('modeFilter').value='wrong';$('randomSequenceToggle').checked=true;showView('practice');setQuestion(ids[Math.floor(Math.random()*ids.length)])};
+$('reviewWordsBtn').onclick=()=>{$('vocabReviewFilter').value='wrong';$('vocabMode').value='flash';showView('vocab');vi=vpool()[0]??0;vflipped=false;vanswered=false;renderVocab()};
 $('resetProgress').onclick=()=>{if(confirm('Xóa toàn bộ lịch sử và câu đã lưu trên thiết bị này?')){state={attempts:{},bookmarks:[]};save();renderStats();renderProgress();renderBookmarks()}};
 $('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chinese-sentence-lab-progress.json';a.click();URL.revokeObjectURL(a.href)};
 $('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.attempts||!Array.isArray(x.bookmarks))throw Error();state=x;save();renderProgress();alert('Đã nhập tiến độ.')}catch(err){alert('Tệp tiến độ không hợp lệ.')}};r.readAsText(f)};
@@ -215,9 +225,9 @@ const VOCAB = [{"level":"HSK 1","word":"爱","pinyin":"ài","meaning":"yêu","ex
 const VKEY='chineseSentenceLab.vocab.v1';
 let vprogress={};try{vprogress=JSON.parse(localStorage.getItem(VKEY))||{}}catch(e){}
 let vi=0,vflipped=false,vanswered=false,vchoices=[];
-function vpool(){let level=$('vocabLevel').value,term=$('vocabSearch').value.trim().toLowerCase();return VOCAB.map((x,i)=>i).filter(i=>(level==='all'||VOCAB[i].level===level)&&(!term||[VOCAB[i].word,VOCAB[i].pinyin,VOCAB[i].meaning].some(t=>t.toLowerCase().includes(term))))}
+function vpool(){let level=$('vocabLevel').value,term=$('vocabSearch').value.trim().toLowerCase();return VOCAB.map((x,i)=>i).filter(i=>(level==='all'||VOCAB[i].level===level)&&($('vocabReviewFilter').value!=='wrong'||!!(vprogress[VOCAB[i].level+'|'+VOCAB[i].word]&& (vprogress[VOCAB[i].level+'|'+VOCAB[i].word].needsReview===true||(vprogress[VOCAB[i].level+'|'+VOCAB[i].word].needsReview===undefined&&vprogress[VOCAB[i].level+'|'+VOCAB[i].word].tries>vprogress[VOCAB[i].level+'|'+VOCAB[i].word].correct))))&&(!term||[VOCAB[i].word,VOCAB[i].pinyin,VOCAB[i].meaning].some(t=>t.toLowerCase().includes(term))))}
 function vnext(dir){let pool=vpool();if(!pool.length)return;let pos=pool.indexOf(vi);vi=pool[(pos<0?0:(pos+dir+pool.length)%pool.length)];vflipped=false;vanswered=false;vchoices=[];renderVocab()}
-function vmark(correct){let v=VOCAB[vi],k=v.level+'|'+v.word;let o=vprogress[k]||{tries:0,correct:0};o.tries++;if(correct)o.correct++;vprogress[k]=o;try{localStorage.setItem(VKEY,JSON.stringify(vprogress))}catch(e){}}
+function vmark(correct){let v=VOCAB[vi],k=v.level+'|'+v.word;let o=vprogress[k]||{tries:0,correct:0};o.tries++;if(correct)o.correct++;o.needsReview=!correct;o.last=Date.now();vprogress[k]=o;try{localStorage.setItem(VKEY,JSON.stringify(vprogress))}catch(e){}}
 function voptions(v,mode){let pool=VOCAB.filter(x=>x.word!==v.word&&x.level===v.level);if(mode==='meaning')pool=pool.filter(x=>x.meaning!==v.meaning);let seenLabels=new Set([mode==='word'?v.word:v.meaning]);let distract=[];for(let x of shuffle(pool)){let label=mode==='word'?x.word:x.meaning;if(!seenLabels.has(label)){seenLabels.add(label);distract.push(x)}if(distract.length===3)break;}return shuffle([v,...distract]).map(x=>({text:mode==='word'?x.word:x.meaning,correct:x.word===v.word}))}
 function renderVocab(){let pool=vpool();$('vocabCount').textContent=VOCAB.length+' từ luyện tập · '+pool.length+' từ đang lọc';let st=$('vocabStage');document.querySelector('#vocabView > .actions').style.display=$('vocabMode').value==='flash'?'none':'flex';if(!pool.length){st.innerHTML='<div class="empty">Không tìm thấy từ phù hợp.</div>';$('vocabMeta').textContent='';return}if(!pool.includes(vi))vi=pool[0];let v=VOCAB[vi],mode=$('vocabMode').value,k=v.level+'|'+v.word,rec=vprogress[k];$('vocabMeta').textContent=v.level+' · Thẻ '+(pool.indexOf(vi)+1)+'/'+pool.length+(rec?' · Đúng '+rec.correct+'/'+rec.tries+' lần':' · Chưa luyện');st.innerHTML='';
  if(mode==='flash'){
@@ -228,20 +238,20 @@ function renderVocab(){let pool=vpool();$('vocabCount').textContent=VOCAB.length
     <div class="flash-face back"><div class="flash-meaning"></div><div class="flash-pinyin"></div><div class="flash-prompt">Chạm để xem lại chữ Hán</div></div>
    </div></div>
    <div class="flash-nav"><button type="button" class="flash-arrow" aria-label="Từ trước">‹</button><div class="flash-progress">← Từ trước &nbsp; · &nbsp; Từ tiếp theo →</div><button type="button" class="flash-arrow" aria-label="Từ tiếp theo">›</button></div>
-   <div class="flash-extras"><div class="flash-example"></div><button type="button" class="flash-mark">Đã nhớ từ này ✓</button></div>`;
+   <div class="flash-extras"><div class="flash-example"></div><div class="review-flash-buttons"><button type="button" class="flash-forgot secondary">Chưa nhớ · Ôn lại</button><button type="button" class="flash-mark">Đã nhớ từ này ✓</button></div></div>`;
   frame.querySelector('.flash-hanzi').textContent=v.word;
   frame.querySelector('.flash-meaning').textContent=v.meaning;
   frame.querySelector('.flash-pinyin').textContent=v.pinyin;
   const scene=frame.querySelector('.flash-scene'),inner=frame.querySelector('.flash-inner');
-  const example=frame.querySelector('.flash-example'),mark=frame.querySelector('.flash-mark');
+  const example=frame.querySelector('.flash-example'),mark=frame.querySelector('.flash-mark'),forgot=frame.querySelector('.flash-forgot');
   const showExtras=()=>{
    example.innerHTML='';
    if(vflipped){
     example.textContent=[v.example,v.examplePinyin?'('+v.examplePinyin+')':'',v.exampleMeaning?'— '+v.exampleMeaning:''].filter(Boolean).join(' ');
-    mark.disabled=false;mark.style.visibility='visible';
+    mark.disabled=false;mark.style.visibility='visible';forgot.disabled=false;forgot.style.visibility='visible';
    }else{
     example.textContent='Lật thẻ để xem câu ví dụ và đánh dấu đã nhớ.';
-    example.classList.add('flash-placeholder');mark.disabled=true;mark.style.visibility='hidden';
+    example.classList.add('flash-placeholder');mark.disabled=true;mark.style.visibility='hidden';forgot.disabled=true;forgot.style.visibility='hidden';
    }
   };
   const flip=()=>{vflipped=!vflipped;inner.classList.toggle('is-flipped',vflipped);example.classList.remove('flash-placeholder');showExtras()};
@@ -249,7 +259,7 @@ function renderVocab(){let pool=vpool();$('vocabCount').textContent=VOCAB.length
   scene.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}};
   frame.querySelector('[aria-label="Từ trước"]').onclick=()=>vnext(-1);
   frame.querySelector('[aria-label="Từ tiếp theo"]').onclick=()=>vnext(1);
-  mark.onclick=()=>{vmark(true);vnext(1)};
+  mark.onclick=()=>{vmark(true);vnext(1)};forgot.onclick=()=>{vmark(false);vnext(1)};
   showExtras();st.append(frame);
  }else if(mode==='cloze'){
   let sentence=v.example||'',idx=sentence.indexOf(v.word);if(idx<0){st.innerHTML='<div class="empty">Ví dụ trong file không chứa từ cần điền. Hãy chuyển sang thẻ khác hoặc chế độ trắc nghiệm.</div>';return;}
@@ -266,6 +276,7 @@ function renderVocab(){let pool=vpool();$('vocabCount').textContent=VOCAB.length
  }
 }
 $('vocabLevel').onchange=()=>{vi=vpool()[0]??0;vflipped=false;vanswered=false;vchoices=[];renderVocab()};
+$('vocabReviewFilter').onchange=()=>{vi=vpool()[0]??0;vflipped=false;vanswered=false;vchoices=[];renderVocab()};
 $('vocabMode').onchange=()=>{vflipped=false;vanswered=false;vchoices=[];renderVocab()};
 $('vocabSearch').oninput=()=>{vi=vpool()[0]??0;vflipped=false;vanswered=false;vchoices=[];renderVocab()};
 $('vocabPrev').onclick=()=>vnext(-1);$('vocabNext').onclick=()=>vnext(1);$('vocabRandom').onclick=()=>{let p=vpool();if(p.length){vi=p[Math.floor(Math.random()*p.length)];vflipped=false;vanswered=false;vchoices=[];renderVocab()}};
@@ -315,5 +326,47 @@ renderStats();setQuestion(0);showView('practice');
  $('dictionaryClose').addEventListener('click',close);sheet.addEventListener('click',e=>{if(e.target===sheet)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  new MutationObserver(()=>{if($('feedback').querySelector('.chinese:not([data-dictionary-ready])'))enhance()}).observe($('feedback'),{childList:true,subtree:true});
  if($('feedback').querySelector('.chinese'))enhance();
+})();
+</script><script id="mandarin-audio">
+(function(){
+'use strict';
+const synth=window.speechSynthesis;
+let currentSpeed='0.75';
+function voices(){try{return synth?synth.getVoices():[]}catch(e){return []}}
+function say(text){
+ if(!synth||typeof SpeechSynthesisUtterance==='undefined'){alert('Trình duyệt này không hỗ trợ đọc văn bản. Hãy mở bằng Safari trên iPhone.');return}
+ if(!text||!String(text).trim())return;
+ try{
+  synth.cancel();const u=new SpeechSynthesisUtterance(String(text).trim());u.lang='zh-CN';u.rate=Number(currentSpeed);u.pitch=1;
+  const available=voices();const voice=available.find(v=>/^zh[-_]CN/i.test(v.lang))||available.find(v=>/^zh/i.test(v.lang));if(voice)u.voice=voice;
+  synth.speak(u);
+ }catch(e){alert('Không thể phát âm thanh trên thiết bị này. Hãy kiểm tra âm lượng và giọng tiếng Trung trong cài đặt iPhone.')}
+}
+function speed(){const select=document.createElement('select');select.className='audio-speed';select.setAttribute('aria-label','Tốc độ đọc tiếng Trung');
+ [['0.75','Chậm 0.75×'],['1','Bình thường 1×']].forEach(([v,label])=>{const o=document.createElement('option');o.value=v;o.textContent=label;select.append(o)});
+ try{currentSpeed=localStorage.getItem('csl.audio.speed')||'0.75'}catch(e){}select.value=currentSpeed;
+ select.addEventListener('change',()=>{currentSpeed=select.value;try{localStorage.setItem('csl.audio.speed',currentSpeed)}catch(e){} });return select;
+}
+function button(label,getText,extraClass=''){const b=document.createElement('button');b.type='button';b.className='audio-btn '+extraClass;b.textContent='🔊 '+label;b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();say(getText())});return b}
+function addAnswer(){const feedback=document.getElementById('feedback');if(!feedback)return;const chinese=feedback.querySelector('.feedback .chinese');if(!chinese||feedback.querySelector('.audio-toolbar'))return;
+ const toolbar=document.createElement('div');toolbar.className='audio-toolbar';toolbar.append(button('Nghe cả câu',()=>chinese.textContent),speed());
+ const explanation=feedback.querySelector('.feedback');if(explanation)explanation.insertBefore(toolbar,chinese);}
+function addDictionary(){const card=document.querySelector('#dictionarySheet .dictionary-card');if(!card)return;
+ const target=document.getElementById('dictionaryPinyin');if(!target||card.querySelector('.dictionary-audio'))return;
+ const b=button('Nghe từ',()=>document.getElementById('dictionaryHanzi').textContent,'dictionary-audio');target.after(b);
+}
+function addFlash(){const stage=document.getElementById('vocabStage');if(!stage)return;
+ const frame=stage.querySelector('.flash-frame');if(!frame||frame.querySelector('.audio-flash'))return;
+ const controls=frame.querySelector('.flash-extras');if(!controls)return;
+ const b=button('Nghe phát âm',()=>frame.querySelector('.flash-hanzi')?.textContent||'','audio-flash');
+ controls.prepend(b);
+}
+function update(){addAnswer();addDictionary();addFlash()}
+let queued=false;function schedule(){if(queued)return;queued=true;queueMicrotask(()=>{queued=false;update()})}
+const feedback=document.getElementById('feedback'),stage=document.getElementById('vocabStage');
+if(feedback)new MutationObserver(schedule).observe(feedback,{childList:true,subtree:true});
+if(stage)new MutationObserver(schedule).observe(stage,{childList:true,subtree:true});
+update();
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&synth)synth.cancel()});
 })();
 </script></body></html>
